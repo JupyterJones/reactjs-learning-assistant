@@ -1,0 +1,38 @@
+In a ReactJS project using TypeScript, `.jsx` and `.tsx` files represent different ways to write component code.  They can be used together within the same project, but their choice impacts the type system.
+
+* **`.jsx` (JSX):**  This extension indicates a JavaScript file containing JSX (JavaScript XML).  It uses plain JavaScript, offering flexibility but lacking the type safety of TypeScript.  This means you won't get compile-time error checking for types.
+
+* **`.tsx` (TSX):** This extension denotes a TypeScript file using JSX. It leverages TypeScript's type system, enabling static type checking, improved code maintainability, and better refactoring support. This enhances developer experience and catches errors early.
+
+
+**Example:**
+
+Let's say you have a simple component to display a user's name:
+
+**`User.jsx` (JavaScript with JSX):**
+
+```jsx
+function User(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+export default User;
+```
+
+**`User.tsx` (TypeScript with JSX):**
+
+```tsx
+interface UserProps {
+  name: string;
+}
+
+const User: React.FC<UserProps> = ({ name }) => {
+  return <h1>Hello, {name}!</h1>;
+};
+
+export default User;
+```
+
+Notice the type definition (`UserProps`) and the explicit typing in the TypeScript version.  If you pass an incorrect type to `User` in `.tsx`, you'll get a compiler error; in `.jsx`, the error will only surface at runtime (if at all).
+
+
+**Can you use both?** Absolutely!  It's common to have a mix of `.jsx` and `.tsx` files in a large project. You might choose to gradually migrate from JavaScript to TypeScript, start with `.jsx` for simpler components, or keep some legacy components in `.jsx`.  The FastAPI backend (which is Python-based) is entirely independent of this choice; it only interacts with your React frontend via APIs.  Your frontend's component file extensions don't affect FastAPI.

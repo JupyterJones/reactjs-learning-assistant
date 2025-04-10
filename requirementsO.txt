@@ -1,0 +1,33 @@
+# requirements.txt (for FastAPI backend - Local Development)
+
+# Core FastAPI framework
+fastapi
+
+# ASGI server needed to run FastAPI (includes standard dependencies like websockets)
+uvicorn[standard]
+
+# For making HTTP requests (to call Gemini API)
+requests
+
+# For loading environment variables (like API keys) from a .env file
+python-dotenv
+
+# Vector database for storing and searching embeddings
+chromadb
+
+# For generating text embeddings
+sentence-transformers
+
+# ----- Optional, but recommended by ChromaDB -----
+# For faster JSON parsing (ChromaDB dependency)
+# orjson # Uncomment if needed, pip might install it as a chromadb dependency anyway
+
+# For server performance monitoring (ChromaDB dependency)
+# psutil # Uncomment if needed
+
+# ----- Notes -----
+# sentence-transformers will pull in larger libraries like PyTorch or TensorFlow.
+# FastAPI has built-in CORS middleware support (configured in your main.py),
+# so Flask-Cors is not needed here.
+# Gunicorn is NOT included as it's primarily for production deployment.
+# Uvicorn (uvicorn main:app --reload) is used to run FastAPI locally.

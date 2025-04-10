@@ -1,5 +1,3 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /frontend/node_modules
 /node_modules
@@ -11,32 +9,57 @@
 
 # production
 /build
+/dist/
 
-# misc
+# IDE
 .DS_Store
+.idea/
+.vscode/
+
+# Environment
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env
+.env.*
 
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-*.db
+
+# Databases
 *.sqlite
 *.sqlite3
-.env
-.env.*
+
+# Secrets
 secrets.json
 config.json
 *.pem
 *.key
 *.crt
+
+# Backups
 *.bak
 *.old
 *.swp
 *.tmp
+
+# OS
 Thumbs.db
+
+# Backend
+backend/Gemini_key.py
+backend/venv
+__pycache__/
+*.pyc
+*.pyo
+
+# Frontend
 frontend/YouTube_Assets/ReactJS_Learning_Assistant_Created_by_FlaskArchitect.mp4
 frontend/YouTube_Assets/ReactJS_Learning_Assistant_Created_by_FlaskArchitect_Final.mp4
-frontend/node_modules/.cache/default-development/16.pack
+frontend/node_modules
+
+# Documentation
+/docs/_build/
