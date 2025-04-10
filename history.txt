@@ -1,0 +1,150 @@
+74413  cat *.txt >>all.txt
+74414  sudo chmod 666  *.*
+74415  cat *.txt >>all.txt
+74416  cat *.txt >>../all.txt
+74417  cat *.txt >>~/Desktop/all.txt
+74418  ls *.py
+74419  cb
+74420  python ImageBot1.py
+74421  fadem $(pwd)/
+74422  python ImageBot2.py
+74423  locate wordcloud.txt
+74424  cp /mnt/HDD500/JupyterNotebook-Graphics-master/text/wordcloud.txt .
+74425  python ImageBot2.py
+74426  jn
+74427  jn
+74428  npm install react-native-copilot
+74429  npm uninstall react-native-copilot
+74430  npm install -g npm@11.3.0
+74431  npm audit
+74432  locate code_completion
+74433  sub /mnt/HDD500/Video_Maker/static/text_files/code_completion_resources.txt
+74434  node -v
+74435  git clone git@github.com:JupyterJones/react-native-copilot.git
+74436  cd react-native-copilot
+74437  ls
+74438  npm install
+74439  npm install react-native-copilot
+74440  sudo rm *.*
+74441  ls
+74442  sudo rm -r src
+74443  ls
+74444  npm install react-native-copilot
+74445  npm install
+74446  sudo apt install adb
+74447  thunar
+74448  npm start
+74449  npm start
+74450  ffmpeg -i ReactJS_Learning_Assistant_Created_by_FlaskArchitect_Final.mp4 ReactJS_Learning_Assistant_Created_by_FlaskArchitect_Final_R.mp4
+74451  LINKS -i "
+74452  https://console.paperspace.com/tegcehdgg/projects/p8om1r1wlah/notebooks
+74453  "
+74454  LINK -i "
+74455  https://console.paperspace.com/tegcehdgg/projects/p8om1r1wlah/notebooks
+74456  "
+74457  LINK -i "
+74458  https://www.digitalocean.com/pricing
+74459  "
+74460  code .
+74461  which  NOTE
+74462  cp /usr/local/bin/NOTE NOTES
+74463  ln -s /home/jack/Desktop/reactjs-learning-assistant/NOTES /usr/local/bin/NOTES
+74464  NOTES
+74465  sudo apt update
+74466  apt list --upgradable
+74467  sudo apt upgrade
+74468  source backend/venv/bin/python
+74469  source backend/venv/bin/activate
+74470  conda deactivate
+74471  /usr/bin/python /home/jack/.vscode/extensions/ms-python.python-2025.4.0-linux-x64/python_files/printEnvVariablesToFile.py /home/jack/.vscode/extensions/ms-python.python-2025.4.0-linux-x64/python_files/deactivate/bash/envVars.txt
+74472  ls /home/jack/hidden/Gemini_key.py
+74473  cp /home/jack/hidden/Gemini_key.py .
+74474  emptytrash
+74475  code .
+74476  cd ../../
+74477  source venv/bin/activate
+74478  nano Start
+74479  chmod +x Start
+74480  ./Start
+74481  nano Start
+74482  ./Start
+74483  cp Start /mnt/HDD500/reactjs-learning-assistant/backend
+74484  ls -rant /mnt/HDD500/reactjs-learning-assistant/backend
+74485  npm start
+74486  ./Start
+74487  source venv/bin/activate
+74488  conda deactivate
+74489  ./Start
+74490  nano Start
+74491  git clone git@github.com:JupyterJones/reactjs-learning-assistant.git
+74492  cd reactjs-learning-assistant
+74493  fix_git
+74494  git_fix
+74495  sub /usr/local/bin/fix_git
+74496  which python
+74497  /bin/python
+74498  /bin/python3
+74499  ls -rant
+74500  chmod fix_git
+74501  chmod -x fix_git
+74502  ./fix_git
+74503  ls -rant
+74504  chmod +x fix_git
+74505  ./fix_git
+74506  /bin/python -m pip install icecream
+74507  /bin/python3 -m pip install icecream
+74508  ./fix_git
+74509  sub .gitignore
+74510  git add .
+74511  git commit -m "first push"
+74512  git push
+74513  sub requirements.txt
+74514  source venv/bin/activate
+74515  conda deactivate
+74516  pip freeze >requirements.txt
+74517  python
+74518  source venv/bin/activate
+74519  which python
+74520  conda deactivate
+74521  which python
+74522  source venv/bin/activate
+74523  conda deactivate
+74524  which python
+74525  which python3
+74526  emptytrash
+74527  history |grep venv
+74528  python3 -m venv venv
+74529  source venv/bin/activate
+74530  conda deactivate
+74531  which python
+74532  history |grep requirements
+74533  python
+74534  ./Start
+74535  npm start
+74536  htop
+74537  free
+74538  python -m pip install -r requirements.txt
+74539  ls
+74540  cd backende
+74541  cd backend
+74542  ls
+74543  cd ../
+74544  sub .gitignore
+74545  code .
+74546  deactivate
+74547  cd backend
+74548  source venv/bin/activate
+74549  conda deactivate
+74550  which python
+74551  npm install
+74552  sub fix_git
+74553  python fix_git
+74554  cb
+74555  python fix_git
+74556  sub .gitignore
+74557  git add .
+74558  git commit -m "First Push"
+74559  git push
+74560  history 50 >history.txt
+74561  sub history.txt
+74562  history 150 >history.txt
