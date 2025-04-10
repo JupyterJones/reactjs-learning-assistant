@@ -1,0 +1,11 @@
+//  .babelrc
+{
+  "presets": [
+    "@babel/preset-env",    // Handles modern JavaScript
+    "@babel/preset-react",  // Handles React JSX
+    "@babel/preset-typescript"  // Ensures TypeScript is properly handled
+  ],
+  "plugins": [
+    "@babel/plugin-transform-modules-commonjs"
+  ]
+}

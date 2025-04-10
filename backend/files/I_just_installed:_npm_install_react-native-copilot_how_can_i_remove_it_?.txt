@@ -1,0 +1,15 @@
+`react-native-copilot` is a React Native package, not a ReactJS package.  ReactJS runs in web browsers, while React Native builds mobile apps.  If you installed it by mistake and want to remove it, you need to use npm or yarn (depending on your package manager):
+
+**Using npm:**
+
+```bash
+npm uninstall react-native-copilot
+```
+
+**Using yarn:**
+
+```bash
+yarn remove react-native-copilot
+```
+
+This command will remove the package from your `package.json` file and your `node_modules` directory.  Remember to commit these changes to your version control system (like Git) afterwards.

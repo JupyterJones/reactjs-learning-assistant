@@ -1,0 +1,74 @@
+In React, `useCallback` is a hook that returns a memoized callback function.  This means it only creates a new function if one of its dependencies has changed.  This is crucial for performance optimization, especially when passing callbacks down to child components that trigger re-renders.  Without `useCallback`, a new callback function is created on every render, leading to unnecessary re-renders of child components that depend on that callback.
+
+**How it works:**
+
+`useCallback(callback, dependencies)` takes two arguments:
+
+* `callback`: The function you want to memoize.
+* `dependencies`: An array of values.  The callback is only recreated if any of these values change.
+
+**Examples:**
+
+**Example 1: Preventing unnecessary re-renders in a child component:**
+
+```javascript
+import React, { useState, useCallback } from 'react';
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => {
+    setCount(count + 1);
+  }, [count]); // Only recreates 'increment' if 'count' changes
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <Button onClick={increment}>Increment</Button>
+    </div>
+  );
+}
+
+function Button({ onClick }) {
+  return <button onClick={onClick}>Click me</button>;
+}
+
+export default MyComponent;
+```
+
+In this example, `increment` is memoized.  If `count` doesn't change, `Button` won't re-render unnecessarily even if `MyComponent` re-renders (e.g., due to other state updates).
+
+
+**Example 2:  Memoizing a complex function:**
+
+```javascript
+import React, { useState, useCallback } from 'react';
+
+function MyComponent() {
+  const [data, setData] = useState([]);
+  const [filter, setFilter] = useState('');
+
+  const filteredData = useCallback(() => {
+    // Imagine this is a computationally expensive operation
+    return data.filter(item => item.name.includes(filter));
+  }, [data, filter]); // Recreates only if 'data' or 'filter' changes
+
+  return (
+    <div>
+      <input type="text" value={filter} onChange={e => setFilter(e.target.value)} />
+      <ul>
+        {filteredData().map(item => <li key={item.id}>{item.name}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+export default MyComponent;
+```
+
+Here, `filteredData` is a computationally intensive function. `useCallback` ensures it's only recalculated when `data` or `filter` changes, preventing performance degradation.  Without `useCallback`, it would re-run on every render.
+
+
+**Relationship to FastAPI:**
+
+`useCallback` is a React-specific optimization.  FastAPI is a Python framework for building APIs. They are separate technologies.  `useCallback` helps optimize the React frontend's performance when fetching and displaying data from a FastAPI backend, but it doesn't directly impact the FastAPI server itself.  The performance benefit is solely within the React component lifecycle.

@@ -1,0 +1,62 @@
+// filename: reactjs-learning-assistant/frontend/src/App.tsx
+import React, { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import AskForm from './components/AskForm';
+//import HistoryDisplay from './components/HistoryDisplay';
+import FileCreate from './components/FileCreate';
+import FileList from './components/FileList';
+import SecondPage from './components/SecondPage'; // Import SecondPage
+import SqliteData from './components/SqliteData'; // Import SqliteData
+import TextFiles from './components/TextFiles'; // Import TextFiles
+import YouTubeVideo from './components/YouTubeVideo'; // Import YouTubeVideo
+/**
+ * ThirdPage component that renders a section with a heading and 
+ * descriptive text about viewing question and answer history.
+ * Includes a link to navigate back to the Home Page.
+ */
+
+function ThirdPage() {
+  return (
+    <div>
+      <h2>This is the ThirdPage</h2>
+      <p>Here you can view your question and answer history.</p>
+
+      <Link to="/">Go back to the Home Page</Link>
+    </div>
+  );
+}
+function App() {
+  //const [reloadHistoryCounter, setReloadHistoryCounter] = useState(0);
+  const [reloadFilesCounter, setReloadFilesCounter] = useState(0);
+
+  const handleReloadFiles = useCallback(() => {
+    setReloadFilesCounter(prev => prev + 1);
+  }, []);
+
+  return (
+    <Router>
+      <div className="App" style={{ width: '93%', textAlign: 'center', marginTop: '10px', marginRight:'auto', marginLeft: 'auto', padding: '5px', border: '1px solid #eee',  borderRadius: '5px', backgroundColor: 'darkred',color: 'yellow' }}>
+        <h1>ReactJS Learning Assistant</h1>
+        <nav>
+          <Link to="/" style={{ color: 'lightblue', marginRight: '10px' }}>Home</Link>
+          <Link to="/history" style={{ color: 'lightblue', marginRight: '10px' }} >History</Link> {/* Changed the Link to /history */}
+
+        <Link to="/TextFiles" style={{ color: 'lightblue', marginRight: '10px' }} >TextFiles</Link> {/* Changed the Link to /history */}
+
+          <button onClick={handleReloadFiles} style={{ marginLeft: '10px', padding: '8px 12px' }}>Reload Files</button>
+        </nav>
+        <hr />
+        <Routes>
+          <Route path="/" element={<>
+            <AskForm />
+          </>} />
+          <Route path="/history" element={<SqliteData />} /> {/* Changed the path to /history */}
+          <Route path="/TextFiles" element={<TextFiles />} /> {/* Changed the path to /history */}
+        </Routes><br/>
+        <YouTubeVideo />
+      </div>
+    </Router>
+  );
+}
+
+export default App;

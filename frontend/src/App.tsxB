@@ -1,0 +1,31 @@
+// filename App.tsx
+import React from 'react';
+import logo from './logo.svg'; // You can keep or remove the logo stuff if you want
+import './App.css';
+import AskForm from './components/AskForm'; // Correctly imported
+import HistoryDisplay from './components/HistoryDisplay'; // Import the new component
+import FileCreate from './components/FileCreate'; // import Create a text file
+import FileList from './components/FileList'; // import list text files
+function App() {
+  return (
+    <div className="App">
+      {/* You can keep or modify the default header */}
+      <header className="App-header">
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
+         <h1>ReactJS Learning Assistant</h1> {/* Changed the title maybe? */}
+        {/* Removed the default paragraph and link for simplicity, */}
+        {/* but you can add them back if you like */}
+      </header>
+
+      <hr /> {/* Optional separator */}
+
+      {/* ===> Add the AskForm component here <=== */}
+      <AskForm />
+      <FileCreate />
+      <FileList />
+      <HistoryDisplay /> {/* Include the HistoryDisplay component */}
+    </div>
+  );
+}
+
+export default App;

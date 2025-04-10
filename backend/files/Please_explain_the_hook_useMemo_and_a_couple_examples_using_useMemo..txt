@@ -1,0 +1,86 @@
+In React, `useMemo` is a Hook that lets you memoize the result of a computationally expensive function.  This means it only re-runs the function and updates its value if one of its dependencies changes.  This improves performance by avoiding unnecessary re-calculations.
+
+**How it works:**
+
+`useMemo` takes two arguments:
+
+1. **A function:** This function computes the value you want to memoize.
+2. **An array of dependencies:**  This array contains values that the function depends on.  If any of these values change between renders, the function will be re-executed, and the new value will be returned.  Otherwise, the previously computed value is returned.
+
+**Examples:**
+
+**Example 1: Memoizing a complex calculation:**
+
+Let's say you have a component that displays the sum of a large array of numbers:
+
+```javascript
+import React, { useState, useMemo } from 'react';
+
+function ExpensiveComponent({ numbers }) {
+  const sum = useMemo(() => {
+    let total = 0;
+    for (let i = 0; i < numbers.length; i++) {
+      total += numbers[i]; // Simulate a complex calculation
+    }
+    return total;
+  }, [numbers]); // Only recalculate if 'numbers' changes
+
+  return <div>The sum is: {sum}</div>;
+}
+
+function App() {
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  const [count, setCount] = useState(0); // this won't trigger the sum recalculation
+
+  return (
+    <div>
+      <ExpensiveComponent numbers={numbers} />
+      <button onClick={() => setNumbers([...numbers, numbers.length + 1])}>Add Number</button>
+      <button onClick={() => setCount(count + 1)}>Increment Count</button> </div>
+  );
+}
+
+export default App;
+
+```
+
+In this example, the `sum` is only recalculated when the `numbers` array changes.  Clicking "Add Number" will trigger a recalculation, but clicking "Increment Count" will not, because `count` is not a dependency of `useMemo`.
+
+**Example 2: Memoizing a derived value:**
+
+Let's say you need to create a formatted string from some data:
+
+```javascript
+import React, { useState, useMemo } from 'react';
+
+function MyComponent({ firstName, lastName }) {
+  const fullName = useMemo(() => {
+    return `${firstName} ${lastName}`;
+  }, [firstName, lastName]);
+
+  return <div>Full Name: {fullName}</div>;
+}
+
+function App() {
+  const [firstName, setFirstName] = useState('John');
+  const [lastName, setLastName] = useState('Doe');
+
+  return (
+    <div>
+      <MyComponent firstName={firstName} lastName={lastName} />
+      <button onClick={() => setFirstName('Jane')}>Change First Name</button>
+      <button onClick={() => setLastName('Smith')}>Change Last Name</button>
+    </div>
+  );
+}
+
+export default App;
+```
+
+
+Here, `fullName` is only recomputed if `firstName` or `lastName` changes.
+
+
+**Relevance to FastAPI:**
+
+FastAPI is a backend framework, and `useMemo` is a React frontend hook. They don't directly interact.  `useMemo` optimizes your React component's rendering performance, while FastAPI handles your backend API requests.  The data fetched from FastAPI might be used within a `useMemo` function to avoid redundant calculations on the frontend.  For instance, you might fetch a large dataset from FastAPI, and then use `useMemo` to process or filter that data before displaying it in your React component.

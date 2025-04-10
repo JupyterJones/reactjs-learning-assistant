@@ -1,0 +1,85 @@
+#!/bin/python3
+import os
+from icecream import ic
+
+# List of common sensitive file patterns to block
+COMMON_SENSITIVE_PATTERNS = [
+    "*.db", "*.sqlite", "*.sqlite3",
+    ".env", ".env.*", "secrets.json", "config.json",
+    "*.pem", "*.key", "*.crt",
+    "*.bak", "*.old", "*.swp", "*.tmp",
+    ".DS_Store", "Thumbs.db"
+]
+
+def get_large_files(directory, size_limit_mb):
+    """
+    Walk through the directory and get files larger than the specified size limit.
+    """
+    large_files = []
+    size_limit_bytes = size_limit_mb * 1024 * 1024
+    ic(f"Scanning {directory} for files over {size_limit_mb} MB...")
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+
+            if os.path.islink(file_path):
+                continue  # Skip symbolic links
+
+            try:
+                file_size = os.path.getsize(file_path)
+                if file_size > size_limit_bytes:
+                    size_mb = round(file_size / (1024 * 1024), 2)
+                    ic(f"Large file: {file_path} - {size_mb} MB")
+                    large_files.append(file_path)
+            except (OSError, PermissionError) as e:
+                ic(f"Error reading {file_path}: {e}")
+                continue
+
+    return large_files
+
+def update_gitignore(large_files, gitignore_path=".gitignore"):
+    """
+    Update .gitignore with large files and sensitive patterns if not already present.
+    """
+    if os.path.exists(gitignore_path):
+        with open(gitignore_path, "r") as f:
+            gitignore_contents = set(line.strip() for line in f if line.strip())
+    else:
+        gitignore_contents = set()
+
+    new_entries = []
+
+    # Add sensitive patterns if not already present
+    for pattern in COMMON_SENSITIVE_PATTERNS:
+        if pattern not in gitignore_contents:
+            new_entries.append(pattern)
+
+    # Add large files by relative path
+    for file in large_files:
+        relative_path = os.path.relpath(file)
+        if relative_path not in gitignore_contents:
+            new_entries.append(relative_path)
+
+    if new_entries:
+        with open(gitignore_path, "a") as f:
+            for entry in new_entries:
+                f.write(entry + "\n")
+                ic(f"Added to .gitignore: {entry}")
+        print(f"\n✅ Added {len(new_entries)} new entries to {gitignore_path}")
+    else:
+        print("ℹ️ No new entries needed in .gitignore")
+
+def main():
+    current_directory = os.getcwd()
+    size_limit_mb = 40
+
+    print("🔐 Checking for large and sensitive files before git add...")
+    large_files = get_large_files(current_directory, size_limit_mb)
+    update_gitignore(large_files)
+
+    print("⚠️  Review .gitignore before committing.\n💡 Rerun `git add .` after this step.")
+
+if __name__ == "__main__":
+    main()
+

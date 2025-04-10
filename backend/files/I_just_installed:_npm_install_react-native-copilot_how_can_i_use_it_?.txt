@@ -1,0 +1,112 @@
+`react-native-copilot` is a library for creating guided tours and walkthroughs within React Native applications.  It's **not** directly compatible with ReactJS (used for web development) or FastAPI (a Python backend framework).  It's specifically for React Native (mobile app development).
+
+If you've installed it in a React Native project, here's how to use it:
+
+1. **Import the necessary components:**
+
+```javascript
+import {
+  Overlay,
+  Tooltip,
+  HelpText,
+  Skip,
+  Circle,
+  Text,
+  Start,
+  Walkthrough,
+  Next,
+  Prev,
+} from 'react-native-copilot';
+```
+
+
+2. **Define your walkthrough steps:**  This involves creating an array of objects, each describing a step in your tour.  Each object typically includes:
+
+* `name`: A unique identifier for the step.
+* `order`: The order in which the step should appear.
+* `element`: A reference to the UI element you want to highlight (usually using a ref).
+* `content`: The text to display in the tooltip.  You can also customize the appearance of the tooltip and its position.
+
+```javascript
+const steps = [
+  {
+    name: 'login-screen',
+    order: 1,
+    element: (
+      <Text ref={this.loginRef} style={{fontSize: 20}}>Login Here</Text>
+    ), //This is where a ref is used to identify the UI Element
+    content: (
+      <HelpText>This is where you login</HelpText>
+    )
+  },
+  {
+    name: 'password-field',
+    order: 2,
+    element: (
+       <TextInput ref={this.passwordRef} placeholder="Password"/>
+    ),
+    content: (
+      <Text>Enter Password</Text>
+    ),
+  },
+];
+```
+
+3. **Use the `Walkthrough` component:**  This wraps your app content and manages the tour.
+
+```javascript
+import React, { useRef, useState } from 'react';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { Walkthrough } from 'react-native-copilot';
+
+
+const MyComponent = () => {
+    const loginRef = useRef(null);
+    const passwordRef = useRef(null);
+    const [isWalkthroughVisible, setIsWalkthroughVisible] = useState(false);
+
+
+    const steps = [ /* ... your steps as defined above ... */ ];
+
+    return (
+      <View style={styles.container}>
+        <Walkthrough
+          steps={steps}
+          handleNext={() => {/* handle next button click*/}}
+          handlePrev={() => {/* handle prev button click*/}}
+          onSkip={() => {/* handle skip click*/}}
+          isVisible={isWalkthroughVisible}
+          onClose={() => setIsWalkthroughVisible(false)} // Close Walkthrough
+        >
+          <Text ref={loginRef} style={styles.text}>Login Here</Text>
+          <TextInput ref={passwordRef} placeholder="Password" style={styles.input}/>
+          <Button title="Start Walkthrough" onPress={() => setIsWalkthroughVisible(true)}/>
+        </Walkthrough>
+      </View>
+    );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+});
+
+export default MyComponent;
+
+```
+
+**Crucially:**  This code requires a React Native environment, not a standard React web application.  FastAPI plays no role in this process; it's solely a backend API and has no direct interaction with client-side React Native libraries.  You'd use FastAPI to provide data to your React Native app, but not to manage the walkthrough itself.  Make sure your project is set up correctly for React Native before trying to use `react-native-copilot`.

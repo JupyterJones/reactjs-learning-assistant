@@ -1,0 +1,55 @@
+// filename: reactjs-learning-assistant/frontend/src/App.tsx
+import React, { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import AskForm from './components/AskForm';
+//import HistoryDisplay from './components/HistoryDisplay';
+import FileCreate from './components/FileCreate';
+import FileList from './components/FileList';
+import SecondPage from './components/SecondPage'; // Import SecondPage
+
+function ThirdPage() {
+  return (
+    <div>
+      <h2>This is the Second Page</h2>
+      <p>Here you can view your question and answer history.</p>
+      
+      <Link to="/">Go back to the Home Page</Link>
+    </div>
+  );
+}
+function App() {
+  //const [reloadHistoryCounter, setReloadHistoryCounter] = useState(0);
+  const [reloadFilesCounter, setReloadFilesCounter] = useState(0);
+
+
+
+  const handleReloadFiles = useCallback(() => {
+    setReloadFilesCounter(prev => prev + 1);
+  }, []);
+
+  return (
+    <Router>
+      <div className="App" style={{ fontFamily: 'Arial, sans-serif', padding: '20px' }}>
+        <h1>ReactJS Learning Assistant</h1>
+        <nav>
+          <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
+          <Link to="/second-page">Second Page</Link>
+
+          <button onClick={handleReloadFiles} style={{ marginLeft: '10px', padding: '8px 12px' }}>Reload Files</button>
+        </nav>
+        <hr />
+        <Routes>
+          <Route path="/" element={<>
+            <AskForm />
+
+            <FileCreate />
+            <FileList key={reloadFilesCounter} />
+          </>} />
+          <Route path="/second-page" element={<SecondPage />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
